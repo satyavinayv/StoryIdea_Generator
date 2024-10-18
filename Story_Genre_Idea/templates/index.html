@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Prompt Generator</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Story Prompt Generator</h1>
+        
+        <!-- Form to generate a prompt -->
+        <form method="POST">
+            <button type="submit">Generate Story Prompt</button>
+        </form>
+        
+        <!-- Display the generated story prompt -->
+        {% if prompt %}
+        <h2>Your Story Prompt:</h2>
+        <p>{{ prompt }}</p>
+        
+        <!-- Feedback Form -->
+        <h3>Was this prompt helpful?</h3>
+        <form method="POST" action="/feedback">
+            <input type="hidden" name="prompt" value="{{ prompt }}">
+            <input type="radio" name="feedback" value="yes" required> Yes
+            <input type="radio" name="feedback" value="no"> No
+            <br><br>
+            <textarea name="comments" placeholder="Additional feedback (optional)" rows="4" cols="50"></textarea>
+            <br><br>
+            <button type="submit">Submit Feedback</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>
